@@ -1,0 +1,24 @@
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+
+const TOKEN = '1a4ae4b7cbf1f44a078ecdeec8140efdb3d690fba4b84509d43c590fbb638c8c';
+
+// Quand le bot est prêt
+client.once('ready', () => {
+    console.log('Le bot est en ligne !');
+});
+
+// Répondre aux messages
+client.on('messageCreate', (message) => {
+    if (message.content === '!mines') {
+        message.channel.send('Bienvenue au jeu des mines ! Tapez `!jouer` pour commencer.');
+    }
+
+    if (message.content === '!jouer') {
+        // Ajouter une simple logique pour le jeu des mines
+        const mines = Math.random() > 0.5 ? '💣' : '✅';
+        message.channel.send(`Voici votre résultat : ${mines}`);
+    }
+});
+
+client.login(TOKEN);
